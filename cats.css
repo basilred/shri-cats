@@ -1,0 +1,7 @@
+.gallery > img {
+	padding: 10px;
+}
+
+.selected {
+	background-color: orange;
+}

@@ -1,29 +1,38 @@
 (function($, undefined) {
 	$(function() {
 		// Альбом, с которым будем работать
-		var album = "http://api-fotki.yandex.ru/api/users/aig1001/album/63684/";
+		var album = "http://api-fotki.yandex.ru/api/users/aig1001/album/63684/photos/?format=json";
 
-		// Парсинг ответа сервера
-		function parsePage (data) {
-			var entries = data.entries;
-			
-			for (var i = 0; i < entries.length; i++) {
-				console.log( entries[i].imageCount );
-			};
-		}
+		var nextPage; // ссылка на следующую страницу коллекции
+		var pics = [];
 
-		// Получаем коллекцию фотографий из альбома
+		// Получаем коллекции фотографий из альбома
 		function getPage (argument) {
-			argument += "?format=json";
-			return $.ajax({
+			var currentImg = {};
+			$.ajax({
 				url: argument,
 				dataType: "jsonp",
-				jsonpCallback: "parsePage"
+				success: function (data) {
+					for (var i = 0; i < data.entries.length; i++) {
+						$('.gallery').append('<img src="' + data.entries[i].img.XXS.href + '"\/>');
+						// pics.push({'thumb': data.entries[i].img.XXS.href, 'img': data.entries[i].img.orig.href});
+						currentImg.thumb = data.entries[i].img.XXS.href;
+						currentImg.big = data.entries[i].img.orig;
+						
+						pics.push(currentImg);
+					};
+					if (data.links.next) {
+						console.log("Go to page: " + data.links.next);
+						getPage(data.links.next);
+					} else {
+						console.log(pics);
+					}
+				}
 			});
-			// console.log(data);
 		}
 
-		col = getPage(album);
-		
+		getPage(album);
+		console.log(pics);
+				
 	});
 })(jQuery);
