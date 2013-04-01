@@ -8,39 +8,33 @@
 
 
 	function showBigPicture (picture) {
-		// $('.current-picture').append('<img src="' + pics[picture].big.href + '" />');
 		$('.current-picture').empty();
 		$('.current-picture').append('<img/>').find('img').attr('src', picture);
 	}
 
-	// Получаем коллекции фотографий из альбома
+	// Получаем коллекцию фотографий из альбома
 	function getPage (collection_url) {
-		$.ajax({
+		var dfd = $.Deferred();
+		nextPage = $.ajax({
 			url: collection_url,
 			dataType: "jsonp",
 			success: function (data) {
-				for (var i = 0; i < data.entries.length; i++) {
-					var currentImg = {};
-					currentImg.thumb = data.entries[i].img.XXS.href;
-					currentImg.big = data.entries[i].img.orig;
-					pics.push(currentImg);
-						
-					$('.gallery')
-						// .append('<a href="' + currentImg.big.href + '"\/>')
-						.append('<a href="' + currentImg.big.href + '"><img id="' + picsGlobalCount + '" src="' + data.entries[i].img.XXS.href + '"\/></a>');
-						// .wrapInner('<a href="' + currentImg.big.href + '" />');
-					picsGlobalCount++;
-				};
-					
-				if (data.links.next) {
-					console.log("Go to page: " + data.links.next);
-					getPage(data.links.next);
-				} else {
-					console.log(pics);
-					showBigPicture(0);
-				}
+				console.log(data);
+				addTiles(data);
 			}
 		});
+		// dfd.resolve(nextPage);
+		// return dfd.promise();
+	}
+
+	function addTiles (collection) {
+		for (var i = 0; i < collection.entries.length; i++) {
+			if (collection.entries[i].img.orig) {
+				$('.gallery')
+					.append('<a href="' + collection.entries[i].img.orig.href + 
+						'"><img src="' + collection.entries[i].img.XXS.href + '"\/></a>');	
+			}
+		};
 	}
 
 	function prepare () {
