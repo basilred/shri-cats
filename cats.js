@@ -29,11 +29,21 @@
 
 	function addTiles (collection) {
 		for (var i = 0; i < collection.entries.length; i++) {
+			var bigImg;
 			if (collection.entries[i].img.orig) {
-				$('.gallery')
-					.append('<a href="' + collection.entries[i].img.orig.href + 
-						'"><img src="' + collection.entries[i].img.XXS.href + '"\/></a>');	
+				bigImg = collection.entries[i].img.orig.href;
+			} else if (collection.entries[i].img.XXXL) {
+				bigImg = collection.entries[i].img.XXXL.href;
+			} else if (collection.entries[i].img.XXL) {
+				bigImg = collection.entries[i].img.XXL.href;
+			} else if (collection.entries[i].img.XL) {
+				bigImg = collection.entries[i].img.XL.href;
+			} else if (collection.entries[i].img.L) {
+				bigImg = collection.entries[i].img.L.href;
 			}
+			$('.gallery')
+					.append('<a href="' + bigImg + 
+						'"><img src="' + collection.entries[i].img.XXS.href + '"\/></a>');
 		};
 	}
 
