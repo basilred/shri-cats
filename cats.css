@@ -18,11 +18,22 @@
 	bottom: 0;
 }
 
-.gallery > a {
+.gallery-row {
+	position: relative;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.gallery-rule {
+	float: left;
+    vertical-align: baseline;
+}
+
+.gallery a {
 	float: left;
 }
 
-.gallery > a > img {
+.gallery a > img {
 	padding: 10px;
 }
 
