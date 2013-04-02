@@ -20,65 +20,61 @@
 		elem = document.getElementById('gallery');
 		elem.addEventListener('mousewheel', scrollWheel, false);
 		
-		scroller.position=0; 
-  		scroller.step=2; 
-  		scroller.timer=null; 
-
-  	// 	// fix размеров для background (Opera, Chrome) 
- 		// elem = document.getElementById('gallery-row'); 
- 		// elem.style.width = scroller.width;
+		scroller.position=0;
+  		scroller.step=2;
+  		scroller.timer=null;
 	}
 
 	// Обработчик колесика мыши 
-	function scrollWheel(e) { 
-  		e = e ? e : window.event;
-  		var wheelElem = e.target ? e.target : e.srcElement;
-  		var wheelData = e.detail ? e.detail * -1 : e.wheelDelta / 40;
+	function scrollWheel(e) {
+		e = e ? e : window.event;
+		var wheelElem = e.target ? e.target : e.srcElement;
+		var wheelData = e.detail ? e.detail * -1 : e.wheelDelta / 40;
   
-  		// В движке WebKit возвращается значение в 100 раз больше 
-  		if (Math.abs(wheelData)>100) { wheelData=Math.round(wheelData/100); }
-  		if (wheelData<0) {
-    		doScroll('right',10*Math.abs(wheelData));
-  		}
-  		else {
-	    	doScroll('left',10*Math.abs(wheelData));
-  		}
-  		// Подавление события колесика мыши, чтобы оно не передавалось дальше
-	  	if (window.event) {
-    		e.cancelBubble = true;
-    		e.returnValue = false; 
-    		e.cancel = true; 
-  		} 
-  		if (e.stopPropagation && e.preventDefault) { 
-    		e.stopPropagation(); 
-    		e.preventDefault(); 
-  		} 
-  	return false; 
+		// В движке WebKit возвращается значение в 100 раз больше 
+		if (Math.abs(wheelData)>100) { wheelData=Math.round(wheelData/100); }
+		if (wheelData<0) {
+			doScroll('right',10*Math.abs(wheelData));
+		}
+		else {
+			doScroll('left',10*Math.abs(wheelData));
+		}
+		// Подавление события колесика мыши, чтобы оно не передавалось дальше
+		if (window.event) {
+			e.cancelBubble = true;
+			e.returnValue = false; 
+			e.cancel = true; 
+		} 
+		if (e.stopPropagation && e.preventDefault) { 
+			e.stopPropagation(); 
+			e.preventDefault(); 
+		} 
+		return false; 
 	}
 
 	// Функция скроллера 
 	function doScroll(dir,step) { 
-  		var elem = document.getElementById('gallery-row'); 
+		var elem = document.getElementById('gallery-row'); 
   
-  		// Прокрутка влево       
-  		if (dir == 'left') { 
-    		scroller.position += step; 
-    		// Если скроллер вышел за левую границу, то установить позицию в 0 
-    		if (scroller.position > 0) { 
-      			scroller.position = 0; 
-    		}     
-  		} 
-  		// Прокрутка вправо 
-  		else { 
-    		scroller.position -= step; 
-    		// Если скроллер вышел за правую границу, то установить позицию в край 
-    		if (scroller.position < (scroller.window - scroller.width)) { 
-      			scroller.position = scroller.window - scroller.width; 
-    		}     
-  		} 
-  		// Установить позицию полосы скроллера 
-  		elem.style.left = scroller.position + 'px'; 
-	} 
+		// Прокрутка влево       
+		if (dir == 'left') { 
+			scroller.position += step; 
+			// Если скроллер вышел за левую границу, то установить позицию в 0 
+			if (scroller.position > 0) { 
+				scroller.position = 0; 
+			}     
+		} 
+		// Прокрутка вправо 
+		else { 
+			scroller.position -= step; 
+			// Если скроллер вышел за правую границу, то установить позицию в край 
+			if (scroller.position < (scroller.window - scroller.width)) { 
+				scroller.position = scroller.window - scroller.width; 
+			}     
+		} 
+		// Установить позицию полосы скроллера 
+		elem.style.left = scroller.position + 'px'; 
+	}
 
 	// Предзагрузка следующих count картинок к текущей выбранной
 	function preloadNextTo (img, count) {
@@ -88,12 +84,13 @@
 
 	function showBigPicture (picture) {
 		$('.current-picture .big-image').empty();
-		$('.current-picture .big-image').append('<img/>').find('img').attr('src', picture);
+		$('.current-picture .big-image')
+		.append('<img/>').find('img').attr('src', picture);
 	}
 
 	// Получаем коллекцию фотографий из альбома
 	function getPage (collection_url) {
-		var dfd = $.Deferred();
+		// var dfd = $.Deferred();
 		nextPage = $.ajax({
 			url: collection_url,
 			dataType: "jsonp",
@@ -107,6 +104,9 @@
 	}
 
 	function addTiles (collection) {
+		// Поскольку картинки не всегда есть в большом размере (orig)
+		// деградируем постепенно от размера XXXL до L.
+		// Если картинка имеет размер меньше L, то в слайдере её не будет.
 		for (var i = 0; i < collection.entries.length; i++) {
 			var bigImg;
 			if (collection.entries[i].img.orig) {
@@ -124,14 +124,28 @@
 					.append('<a href="' + bigImg + 
 						'"><img src="' + collection.entries[i].img.XXS.href + '"\/></a>');
 		};
-		console.log('gallery-rule width:' + $('.gallery-rule').width());
+		// Нет полностью загруженных превью первой страницы, поэтому ширина 
+		// скроллера не будет соответствовать нужной.
+		// FIX: решить с помощью promise!
 		scrollerInit();
 	}
 
 	function prepare () {
+		// Вешаем на все ссылки страницы обработчик
 		$(document).delegate('a', 'click', function (event) {
 			showBigPicture($(this).attr('href'));
 			return false;
+		});
+
+		// Показ и скрытие галереи при наведении мышкой
+		$('.gallery')
+		.mouseenter(function() {
+			console.log('mouse enter');
+			$(this).css('opacity', '1');
+		})
+		.mouseleave(function() {
+			console.log('mouse leave');
+			$(this).css('opacity', '0.01');
 		});
 	}
 

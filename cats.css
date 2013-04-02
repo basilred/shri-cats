@@ -3,10 +3,14 @@
 	padding: 0;
 }
 
-.current_picture {
-	max-width: 100%;
-	max-height: 100%;
+.big-image {
+	height: 100%;
+}
+
+.big-image > img {
+	display: block;
 	margin: auto;
+	height: 100%;
 }
 
 .gallery {
@@ -16,6 +20,7 @@
 	height: 100px;
 	left: 0;
 	bottom: 0;
+	background-color: rgba(0, 0, 0, .6);
 }
 
 .gallery-row {
