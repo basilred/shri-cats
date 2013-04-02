@@ -5,11 +5,17 @@
 	var nextPage; // ссылка на следующую страницу коллекции
 	var pics = [],
 		picsGlobalCount = 0;
+	var PICS_FOR_PRELOAD = 3; // количество предзагружаемых картинок
+
+	// Предзагрузка следующих count картинок к текущей выбранной
+	function preloadNextTo (img, count) {
+		// 
+	}
 
 
 	function showBigPicture (picture) {
-		$('.current-picture').empty();
-		$('.current-picture').append('<img/>').find('img').attr('src', picture);
+		$('.current-picture .big-image').empty();
+		$('.current-picture .big-image').append('<img/>').find('img').attr('src', picture);
 	}
 
 	// Получаем коллекцию фотографий из альбома
@@ -57,6 +63,5 @@
 	$(function() {
 		prepare();
 		getPage(album);
-		console.log(pics);
 	});
 })(jQuery);
