@@ -3,6 +3,7 @@
 	var album = "http://api-fotki.yandex.ru/api/users/aig1001/album/63684/photos/?format=json";
 
 	var nextPage; // ссылка на следующую страницу коллекции
+	var currentPage;
 	var pics = [],
 		picsGlobalCount = 0;
 	var PICS_FOR_PRELOAD = 3; // количество предзагружаемых картинок
@@ -14,14 +15,14 @@
 		
 		scroller.width = $('.gallery-rule').width();
 		scroller.window = $('.gallery').width();
-		console.log('gallery-rule:' + scroller.width);
-		console.log('gallery:' + scroller.window);
+		// console.log('gallery-rule:' + scroller.width);
+		// console.log('gallery:' + scroller.window);
 		
 		elem = document.getElementById('gallery');
 		elem.addEventListener('mousewheel', scrollWheel, false);
 		
 		scroller.position=0;
-  		scroller.step=2;
+  		scroller.step=5;
   		scroller.timer=null;
 	}
 
@@ -54,8 +55,8 @@
 
 	// Функция скроллера 
 	function doScroll(dir,step) { 
-		var elem = document.getElementById('gallery-row'); 
-  
+		var elem = document.getElementById('gallery-row');
+		var current_collection = nextPage;
 		// Прокрутка влево       
 		if (dir == 'left') { 
 			scroller.position += step; 
@@ -69,7 +70,17 @@
 			scroller.position -= step; 
 			// Если скроллер вышел за правую границу, то установить позицию в край 
 			if (scroller.position < (scroller.window - scroller.width)) { 
-				scroller.position = scroller.window - scroller.width; 
+				scroller.position = scroller.window - scroller.width;
+				
+				// и начать загрузку следующей коллекции
+				if (nextPage) {
+					// вызыватся столько раз, сколько крутится колёсико
+					// FIX: нужно дождаться загрузки предыдущей.
+					// FIXED: решено введением доп.переменной currentPage
+					if (currentPage != nextPage) {
+						getPage(nextPage);
+					}
+				}
 			}     
 		} 
 		// Установить позицию полосы скроллера 
@@ -91,11 +102,13 @@
 	// Получаем коллекцию фотографий из альбома
 	function getPage (collection_url) {
 		// var dfd = $.Deferred();
-		nextPage = $.ajax({
+		currentPage = collection_url;
+		$.ajax({
 			url: collection_url,
 			dataType: "jsonp",
 			success: function (data) {
 				console.log(data);
+				nextPage = data.links.next;
 				addTiles(data);
 			}
 		});
@@ -121,12 +134,13 @@
 				bigImg = collection.entries[i].img.L.href;
 			}
 			$('.gallery-rule')
-					.append('<a href="' + bigImg + 
-						'"><img src="' + collection.entries[i].img.XXS.href + '"\/></a>');
+			.append('<a href="' + bigImg + 
+				'"><img src="' + collection.entries[i].img.XXS.href + '"\/></a>');
 		};
 		// Нет полностью загруженных превью первой страницы, поэтому ширина 
 		// скроллера не будет соответствовать нужной.
 		// FIX: решить с помощью promise!
+		// FIXED: решено в css заданием фиксированной ширины для контейнера.
 		scrollerInit();
 	}
 
