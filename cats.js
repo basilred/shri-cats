@@ -8,7 +8,7 @@
 		picsGlobalCount = 0;
 	var PICS_FOR_PRELOAD = 3; // количество предзагружаемых картинок
 
-	var scroller = {}; //скроллер для слайдера
+	var scroller = {position:0}; //скроллер для слайдера
 
 	function scrollerInit () {
 		var elem;
@@ -21,7 +21,7 @@
 		elem = document.getElementById('gallery');
 		elem.addEventListener('mousewheel', scrollWheel, false);
 		
-		scroller.position=0;
+		// scroller.position=0;
   		scroller.step=5;
   		scroller.timer=null;
 	}
