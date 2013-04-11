@@ -92,11 +92,26 @@
 		// 
 	}
 
+	// Загрузка картинки по урлу
+	// Возвращаем, когда полностью загружена
+	function loadPicture (url) {
+		var dfd = $.Deferred();
+
+		var $container = $('<div/>').load(url, function() {
+			var $img = $container.find('img');
+
+			$img.bind('load', function() {
+				dfd.resolve($img);
+			});
+		});
+
+		return dfd.promise();
+	}
 
 	function showBigPicture (picture) {
 		$('.current-picture .big-image').empty();
 		$('.current-picture .big-image')
-		.append('<img/>').find('img').attr('src', picture);
+		.append('<img/>').find('img').hide().fadeIn().attr('src', picture);
 	}
 
 	// Получаем коллекцию фотографий из альбома
@@ -148,17 +163,16 @@
 		// Вешаем на все ссылки страницы обработчик
 		$(document).delegate('a', 'click', function (event) {
 			showBigPicture($(this).attr('href'));
+			// loadPicture($(this).attr('href')).then(console.log('LOADED'));
 			return false;
 		});
 
 		// Показ и скрытие галереи при наведении мышкой
 		$('.gallery')
 		.mouseenter(function() {
-			console.log('mouse enter');
 			$(this).css('opacity', '1');
 		})
 		.mouseleave(function() {
-			console.log('mouse leave');
 			$(this).css('opacity', '0.01');
 		});
 	}
