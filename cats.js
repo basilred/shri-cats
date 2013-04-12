@@ -10,6 +10,8 @@
 
 	var scroller = {position:0}; //скроллер для слайдера
 
+	var firstRun = true; // Показ картинки при первом запуске
+
 	function scrollerInit () {
 		var elem;
 		
@@ -151,6 +153,10 @@
 			$('.gallery-rule')
 			.append('<a href="' + bigImg + 
 				'"><img src="' + collection.entries[i].img.XXS.href + '"\/></a>');
+			if (firstRun) {
+				showBigPicture(bigImg);
+				firstRun = false;
+			};
 		};
 		// Нет полностью загруженных превью первой страницы, поэтому ширина 
 		// скроллера не будет соответствовать нужной.
