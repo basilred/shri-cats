@@ -168,6 +168,10 @@
 	function prepare () {
 		// Вешаем на все ссылки страницы обработчик
 		$(document).delegate('a', 'click', function (event) {
+			// Ищем .selected элемент, снимаем у него этот класс
+			// и присваиваем его текущему элементу галереи.
+			$('.gallery').find('.selected').toggleClass('selected');
+			$(this).toggleClass('selected');
 			showBigPicture($(this).attr('href'));
 			// loadPicture($(this).attr('href')).then(console.log('LOADED'));
 			return false;
