@@ -180,10 +180,10 @@
 		// Показ и скрытие галереи при наведении мышкой
 		$('.gallery')
 		.mouseenter(function() {
-			$(this).animate({opacity: 1}, 500);
+			$(this).animate({opacity: 1}, 250);
 		})
 		.mouseleave(function() {
-			$(this).animate({opacity: 0}, 500);
+			$(this).animate({opacity: 0}, 250);
 		});
 	}
 
