@@ -8,9 +8,13 @@
 }
 
 .big-image > img {
-	display: block;
+	text-align: center;
+	position: absolute;
 	margin: auto;
-	height: 100%;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
 }
 
 .gallery {
