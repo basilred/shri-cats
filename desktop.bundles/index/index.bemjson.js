@@ -1,6 +1,6 @@
 ({
     block: 'page',
-    title: 'Title of the page',
+    title: 'shri-cats on BEM',
     favicon: '/favicon.ico',
     head: [
         { elem: 'css', url: '_index.css', ie: false },
@@ -9,21 +9,34 @@
     ],
     content:[
         {
-            block: 'header',
+            block: 'gallery',
             content: [
-                'header content goes here'
-            ]
-        },
-        {
-            block: 'content',
-            content: [
-                'main content'
-            ]
-        },
-        {
-            block: 'footer',
-            content: [
-                'footer content goes here'
+                {
+                    elem: 'left',
+                    content: '<'
+                },
+                {
+                    elem: 'image',
+                    tag: 'img'
+                },
+                {
+                    elem: 'right',
+                    content: '>'
+                },
+                {
+                    block: 'slider',
+                    content: [
+                        {
+                            block: 'scroller',
+                            content: [
+                                {
+                                    elem: 'thumbnail',
+                                    tag: 'img'
+                                }
+                            ]
+                        }
+                    ]
+                }
             ]
         },
         { elem: 'js', url: '_index.js' }
