@@ -13,6 +13,7 @@
             content: [
                 {
                     elem: 'left',
+                    tag: 'span',
                     content: '<'
                 },
                 {
@@ -21,6 +22,7 @@
                 },
                 {
                     elem: 'right',
+                    tag: 'span',
                     content: '>'
                 },
                 {
@@ -31,7 +33,8 @@
                             content: [
                                 {
                                     elem: 'thumbnail',
-                                    tag: 'img'
+                                    tag: 'img',
+                                    content: []
                                 }
                             ]
                         }
