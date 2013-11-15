@@ -10,6 +10,7 @@
     content:[
         {
             block: 'gallery',
+            js: true,
             content: [
                 {
                     elem: 'left',
@@ -32,7 +33,7 @@
                             block: 'scroller',
                             content: [
                                 {
-                                    elem: 'thumbnail',
+                                    block: 'thumbnail',
                                     tag: 'img',
                                     content: []
                                 }

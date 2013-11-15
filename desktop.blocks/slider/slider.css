@@ -1,0 +1,10 @@
+.slider
+{
+	position: absolute;
+	overflow: hidden;
+	width: 100%;
+	height: 95px;
+	left: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, .6);
+}
