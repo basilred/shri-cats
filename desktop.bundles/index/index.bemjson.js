@@ -33,8 +33,9 @@
                             block: 'scroller',
                             content: [
                                 {
-                                    block: 'thumbnail',
-                                    tag: 'img',
+                                    block: 'thumb',
+                                    js: true,
+                                    tag: 'a',
                                     content: []
                                 }
                             ]
