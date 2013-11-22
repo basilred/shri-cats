@@ -13,18 +13,8 @@
             js: true,
             content: [
                 {
-                    elem: 'left',
-                    tag: 'span',
-                    content: '<'
-                },
-                {
                     elem: 'image',
                     tag: 'img'
-                },
-                {
-                    elem: 'right',
-                    tag: 'span',
-                    content: '>'
                 },
                 {
                     block: 'slider',
@@ -34,9 +24,8 @@
                             content: [
                                 {
                                     block: 'thumb',
-                                    js: true,
                                     tag: 'a',
-                                    content: []
+                                    js: true
                                 }
                             ]
                         }

@@ -1,0 +1,6 @@
+block('thumb')(
+    tag()('a'),
+
+    js()(true)
+
+)
