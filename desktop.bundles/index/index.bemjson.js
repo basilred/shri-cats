@@ -10,28 +10,15 @@
     content:[
         {
             block: 'gallery',
-            js: true,
             content: [
                 {
                     elem: 'image',
-                    tag: 'img'
-                },
-                {
-                    block: 'slider',
-                    content: [
-                        {
-                            block: 'scroller',
-                            content: [
-                                {
-                                    block: 'thumb',
-                                    tag: 'a',
-                                    js: true
-                                }
-                            ]
-                        }
-                    ]
+                    url: '/keep-calm-and-bem.png'
                 }
             ]
+        },
+        {
+            block: 'slider'
         },
         { elem: 'js', url: '_index.js' }
     ]

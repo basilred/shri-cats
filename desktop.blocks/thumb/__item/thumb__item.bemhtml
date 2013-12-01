@@ -1,0 +1,9 @@
+block('thumb').elem('item')(
+
+	tag()('img'),
+
+	attrs()(function() {
+		return { src: this.ctx.url || '' }
+	})
+
+);

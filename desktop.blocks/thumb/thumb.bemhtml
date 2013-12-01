@@ -1,6 +1,13 @@
 block('thumb')(
+
+    js()(true),
+
     tag()('a'),
 
-    js()(true)
+    attrs()(function() {
+    	var attrs = {};
+    	attrs.href = this.ctx.url;
+    	return attrs;
+    })
 
-)
+);

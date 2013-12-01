@@ -1,5 +1,6 @@
-.thumb
+.thumb__item
 {
 	width: 95px;
+	padding: 10px;
 	display: inline-block;
 }

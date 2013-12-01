@@ -10,21 +10,18 @@ modules.define(
 
 	DOM.decl('gallery',
 	{
-		beforeSetMod: {
-			'js': {
-				'inited': function() {
-					
-				}
-			}
-		},
-
 		onSetMod: {
 			'js': {
 				'inited': function() {
 					firstRun = true;
 					this.getPage( album );
 					
-
+					// Подписка на BEM-событие click блока thumb
+					DOM.blocks['thumb'].on(
+						$('.slider'),
+						'click',
+						this._onThumbClick,
+						this);
 				}
 			}
 		},
@@ -33,15 +30,13 @@ modules.define(
 			// Показать большую картинку
 			var bigPictureSrc = e.target.domElem.attr('href');
 			this.showBigPicture( bigPictureSrc );
-			// DOM.update(
-			// 	this.elem('image'),
-			// 	BEMHTML.apply({block: 'gallery', elem: 'image', content: [{src: bigPictureSrc}]})
-			// 	);
 		},
 
 		showBigPicture: function(picture) {
-			$('.gallery__image').empty();
-			$('.gallery__image').hide().fadeIn().attr('src', picture);
+			DOM.update(
+				this.domElem,
+				BEMHTML.apply({block: 'gallery', elem: 'image', url: picture})
+				);
 		},
 
 		// Получаем коллекцию фотографий из альбома
@@ -76,29 +71,23 @@ modules.define(
 					bigImg = collection.entries[i].img.L.href;
 				}
 				
-				$('.scroller')
-				.append('<a class="thumb" href="' + bigImg + 
-					'"><img src="' + collection.entries[i].img.XXS.href + '"\/></a>');
+				var thumb = {
+					block: 'thumb',
+					url: bigImg,
+					content: {
+						elem: 'item',
+						attrs: { src: collection.entries[i].img.XXS.href }
+					}
+				};
 
-				// DOM.append(
-				// 	this.findBlockInside('scroller'),
-				// 	BEMHTML.apply({block: 'thumb'})
-				// 	);
+				DOM.append( $('.slider'), BEMHTML.apply(thumb));
 
 				if (firstRun) {
-					// Подписка на BEM-событие click блока thumb
-					DOM.blocks['thumb'].on(
-						this.domElem,
-						'click',
-						this._onThumbClick,
-						this);
-					
 					this.showBigPicture(bigImg);
 					firstRun = false;
 				};
 			};
 		}
-
 	});
 
 	provide(DOM);
