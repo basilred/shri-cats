@@ -18,7 +18,12 @@
             ]
         },
         {
-            block: 'slider'
+            block: 'slider',
+            content: [
+                {
+                    block: 'sliderInner'
+                }
+            ]
         },
         { elem: 'js', url: '_index.js' }
     ]

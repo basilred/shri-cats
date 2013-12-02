@@ -18,7 +18,7 @@ modules.define(
 					
 					// Подписка на BEM-событие click блока thumb
 					DOM.blocks['thumb'].on(
-						$('.slider'),
+						$('.sliderInner'),
 						'click',
 						this._onThumbClick,
 						this);
@@ -80,7 +80,7 @@ modules.define(
 					}
 				};
 
-				DOM.append( $('.slider'), BEMHTML.apply(thumb));
+				DOM.append( $('.sliderInner'), BEMHTML.apply(thumb));
 
 				if (firstRun) {
 					this.showBigPicture(bigImg);
