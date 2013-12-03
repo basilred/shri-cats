@@ -22,6 +22,11 @@ modules.define(
 						'click',
 						this._onThumbClick,
 						this);
+
+					// Вешаем на слайдер обработчик колесика мыши
+					// $('.slider').mousewheel(function(event) {
+					//     console.log(event.deltaX, event.deltaY, event.deltaFactor);
+					// });
 				}
 			}
 		},

@@ -1,7 +1,8 @@
 .slider
 {
 	position: fixed;
-	overflow: hidden;
+	overflow-x: auto;
+	overflow-y: hidden;
 	vertical-align: baseline;
 	width: 100%;
 	height: 95px;
