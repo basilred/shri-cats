@@ -1,9 +1,9 @@
 modules.define(
 	'i-bem__dom',
-	['jquery', 'BEMHTML'],
-	function(provide, $, BEMHTML, DOM) {
+	['jquery', 'BEMHTML', 'mousewheel'],
+	function(provide, $, BEMHTML, mousewheel, DOM) {
 	
-	var album = "http://api-fotki.yandex.ru/api/users/aig1001/album/63684/photos/?format=json",
+	var album = 'http://api-fotki.yandex.ru/api/users/aig1001/album/63684/photos/?format=json',
 		currentPage,
 		nextPage,
 		firstRun;
@@ -23,10 +23,10 @@ modules.define(
 						this._onThumbClick,
 						this);
 
-					// Вешаем на слайдер обработчик колесика мыши
-					// $('.slider').mousewheel(function(event) {
-					//     console.log(event.deltaX, event.deltaY, event.deltaFactor);
-					// });
+					// TODO Вешаем на слайдер обработчик колесика мыши
+					$('.slider').mousewheel(function(event) {
+					    console.log(event.deltaX, event.deltaY, event.deltaFactor);
+					});
 				}
 			}
 		},
@@ -96,4 +96,4 @@ modules.define(
 	});
 
 	provide(DOM);
-})
+});
