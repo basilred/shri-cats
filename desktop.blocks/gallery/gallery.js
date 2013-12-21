@@ -23,9 +23,10 @@ modules.define(
 						this._onThumbClick,
 						this);
 
-					// TODO Вешаем на слайдер обработчик колесика мыши
+					// Вешаем на слайдер обработчик колесика мыши
 					$('.slider').mousewheel(function(event) {
-					    console.log(event.deltaX, event.deltaY, event.deltaFactor);
+					    this.scrollLeft -= event.deltaY;
+					    event.preventDefault();
 					});
 				}
 			}
