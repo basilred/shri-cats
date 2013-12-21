@@ -1,0 +1,59 @@
+/* ../../desktop.blocks/gallery/__image/gallery__image.css begin */
+.gallery__image
+{
+	display: block;
+	max-width: 90%;
+	max-height: 90%;
+	margin: 0 auto;
+}
+
+/* ../../desktop.blocks/gallery/__image/gallery__image.css end */
+/* ../../desktop.blocks/thumb/thumb.css begin */
+.thumb
+{
+	width: 95px;
+	display: inline-block;
+}
+
+/* ../../desktop.blocks/thumb/thumb.css end */
+/* ../../desktop.blocks/thumb/__item/thumb__item.css begin */
+.thumb__item
+{
+	width: 75px;
+	padding: 10px;
+	display: inline-block;
+}
+
+/* ../../desktop.blocks/thumb/__item/thumb__item.css end */
+/* ../../desktop.blocks/slider/slider.css begin */
+.slider
+{
+	position: fixed;
+	/*overflow-x: auto;*/
+	/*overflow-y: hidden;*/
+	overflow-x: hidden;
+	vertical-align: baseline;
+	width: 100%;
+	height: 95px;
+	left: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, .6);
+	opacity: 0;
+	transition: opacity 0.25s;
+}
+
+.slider:hover
+{
+	opacity: 1;
+}
+
+/* ../../desktop.blocks/slider/slider.css end */
+/* ../../desktop.blocks/sliderInner/sliderInner.css begin */
+.sliderInner
+{
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+    height: 95px;
+}
+/* ../../desktop.blocks/sliderInner/sliderInner.css end */
