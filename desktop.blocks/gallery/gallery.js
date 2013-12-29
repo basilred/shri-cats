@@ -4,6 +4,7 @@ modules.define(
 	function(provide, $, BEMHTML, mousewheel, DOM) {
 	
 	var album = 'http://api-fotki.yandex.ru/api/users/aig1001/album/63684/photos/?format=json',
+		lastScrollPosition = 0,
 		currentPage,
 		nextPage,
 		firstRun;
@@ -24,9 +25,16 @@ modules.define(
 						this);
 
 					// Вешаем на слайдер обработчик колесика мыши
+					_this = this;
 					$('.slider').mousewheel(function(event) {
 					    this.scrollLeft -= event.deltaY;
 					    event.preventDefault();
+					    if ((this.scrollLeft > 0) 
+					    	&& (this.scrollLeft === lastScrollPosition) 
+					    	&& (currentPage != nextPage)) {
+					    	_this.getPage(nextPage);
+					    }
+					    lastScrollPosition = this.scrollLeft;
 					});
 				}
 			}
