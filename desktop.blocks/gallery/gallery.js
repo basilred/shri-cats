@@ -51,6 +51,7 @@ modules.define(
 				this.domElem,
 				BEMHTML.apply({block: 'gallery', elem: 'image', url: picture})
 				);
+			$('.gallery__image').hide().fadeIn();
 		},
 
 		// Получаем коллекцию фотографий из альбома
