@@ -5,6 +5,7 @@ modules.define(
 	
 	var album = 'http://api-fotki.yandex.ru/api/users/aig1001/album/63684/photos/?format=json',
 		lastScrollPosition = 0,
+		preloader = '/preloader.gif',
 		currentPage,
 		nextPage,
 		firstRun;
@@ -43,15 +44,28 @@ modules.define(
 		_onThumbClick: function(e) {
 			// Показать большую картинку
 			var bigPictureSrc = e.target.domElem.attr('href');
+			this.showPreloader();
 			this.showBigPicture( bigPictureSrc );
 		},
 
 		showBigPicture: function(picture) {
-			DOM.update(
-				this.domElem,
-				BEMHTML.apply({block: 'gallery', elem: 'image', url: picture})
-				);
-			$('.gallery__image').hide().fadeIn();
+			var img = BEMHTML.apply({
+				block: 'gallery',
+				elem: 'image',
+				url: picture
+			});
+			var $img = $(img);
+
+			_this = this;
+
+			$img.on('load', function() {
+				DOM.update(_this.domElem, $img);
+				$(_this.domElem).hide().fadeIn();
+			});
+		},
+
+		showPreloader: function() {
+			$('.gallery__image').attr({'src': preloader});
 		},
 
 		// Получаем коллекцию фотографий из альбома
