@@ -60,12 +60,25 @@ modules.define(
 
 			$img.on('load', function() {
 				DOM.update(_this.domElem, $img);
+				_this.centrateImage($img);
 				$(_this.domElem).hide().fadeIn();
 			});
+
+			$(window).bind('resize.gallery__image', function() {
+				_this.centrateImage($img);
+			})
+			.trigger('resize');
 		},
 
 		showPreloader: function() {
 			$('.gallery__image').attr({'src': preloader});
+		},
+
+		centrateImage: function($img) {
+			$img.css({
+				'margin-left': $img.width() / -2,
+				'margin-top': $img.height() / -2
+			});
 		},
 
 		// Получаем коллекцию фотографий из альбома
