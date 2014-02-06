@@ -54,14 +54,14 @@ modules.define(
 				elem: 'image',
 				url: picture
 			});
-			var $img = $(img);
 
+			var $img = $(img);
 			_this = this;
 
 			$img.on('load', function() {
-				DOM.update(_this.domElem, $img);
+				DOM.replace(_this.findElem('image'), $img);
 				_this.centrateImage($img);
-				$(_this.domElem).hide().fadeIn();
+				$(_this.findElem('image')).hide().fadeIn();
 			});
 
 			$(window).bind('resize.gallery__image', function() {
@@ -71,7 +71,7 @@ modules.define(
 		},
 
 		showPreloader: function() {
-			$('.gallery__image').attr({'src': preloader});
+			$(this.findElem('image')).attr({'src': preloader});
 		},
 
 		centrateImage: function($img) {
