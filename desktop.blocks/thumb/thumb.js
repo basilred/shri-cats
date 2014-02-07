@@ -27,6 +27,8 @@ modules.define('i-bem__dom', ['BEMHTML'], function(provide, BEMHTML, DOM) {
 
 						// Устанавливаем active на текущий блок
 						this.setMod('active');
+
+						if (!this.domElem.prev().length) this.emit('disablePrev');
 						this.emit('click');
 					}
 				});

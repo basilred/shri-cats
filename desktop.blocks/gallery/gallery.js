@@ -25,6 +25,12 @@ modules.define(
 						this._onThumbClick,
 						this);
 
+					DOM.blocks['thumb'].on(
+						$('.sliderInner'),
+						'disablePrev',
+						this.onDisablePrev,
+						this);
+
 					// Вешаем на слайдер обработчик колесика мыши
 					_this = this;
 					$('.slider').mousewheel(function(event) {
@@ -54,9 +60,11 @@ modules.define(
 		},
 
 		onPrevClick: function() {
-			// Если тумба первая в слайдере,
-			console.log('Prev pressed');
-			// sliderInner.thumb.hasMod('active').prev
+			this.emit('prevPressed');
+		},
+
+		onDisablePrev: function() {
+			this.setMod(this.elem('prev'), 'disabled');
 		},
 
 		showBigPicture: function(picture) {
