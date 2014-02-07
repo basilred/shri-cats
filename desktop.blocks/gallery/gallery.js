@@ -37,6 +37,11 @@ modules.define(
 					    }
 					    lastScrollPosition = this.scrollLeft;
 					});
+
+					// Подписка на событие click элемента prev
+					this.bindTo('prev', 'click', function() {
+						this.onPrevClick();
+					});
 				}
 			}
 		},
@@ -46,6 +51,12 @@ modules.define(
 			var bigPictureSrc = e.target.domElem.attr('href');
 			this.showPreloader();
 			this.showBigPicture( bigPictureSrc );
+		},
+
+		onPrevClick: function() {
+			// Если тумба первая в слайдере,
+			console.log('Prev pressed');
+			// sliderInner.thumb.hasMod('active').prev
 		},
 
 		showBigPicture: function(picture) {
