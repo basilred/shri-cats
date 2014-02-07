@@ -1,7 +1,7 @@
 [{
     mustDeps : { block : 'i-bem', elems : 'dom' },
     shouldDeps : [
-    	{ block : 'thumb', elems: 'item'}
+    	{ block : 'thumb', elems: 'item', mods: {active: ''} }
     ]
 },
 {
