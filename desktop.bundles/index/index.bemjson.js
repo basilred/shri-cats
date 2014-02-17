@@ -20,14 +20,14 @@
                 },
                 {
                     elem: 'next'
-                }
-            ]
-        },
-        {
-            block: 'slider',
-            content: [
+                },
                 {
-                    block: 'sliderInner'
+                    block: 'slider',
+                    content: [
+                        {
+                            elem: 'inner'
+                        }
+                    ]
                 }
             ]
         },

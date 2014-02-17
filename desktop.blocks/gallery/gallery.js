@@ -6,9 +6,9 @@ modules.define(
 	var album = 'http://api-fotki.yandex.ru/api/users/aig1001/album/63684/photos/?format=json',
 		lastScrollPosition = 0,
 		preloader = '/preloader.gif',
+		firstRun,
 		currentPage,
-		nextPage,
-		firstRun;
+		nextPage;
 
 	DOM.decl('gallery',
 	{
@@ -19,52 +19,48 @@ modules.define(
 					this.getPage( album );
 					
 					// Подписка на BEM-событие click блока thumb
-					DOM.blocks['thumb'].on(
-						$('.sliderInner'),
+					DOM.blocks['slider'].on(
 						'click',
-						this._onThumbClick,
+						this.onThumbClick,
 						this);
 
-					DOM.blocks['thumb'].on(
-						$('.sliderInner'),
-						'disablePrev',
-						this.onDisablePrev,
-						this);
+					// Событие click элемента prev
+					this.bindTo('prev', 'click', function() {
+						this.emit('prevPressed');
+					});
+
+					// Событие click элемента next
+					this.bindTo('next', 'click', function() {
+						this.emit('nextPressed');
+					});
+
+					_this = this;
+					$(window).bind('resize.gallery__image', function() {
+						_this.centrateImage(_this.findElem('image'));
+					})
+					.trigger('resize');
 
 					// Вешаем на слайдер обработчик колесика мыши
 					_this = this;
 					$('.slider').mousewheel(function(event) {
+						event.preventDefault();
 					    this.scrollLeft -= event.deltaY;
-					    event.preventDefault();
 					    if ((this.scrollLeft > 0) 
 					    	&& (this.scrollLeft === lastScrollPosition) 
 					    	&& (currentPage != nextPage)) {
-					    	_this.getPage(nextPage);
+					    		_this.getPage(nextPage);
 					    }
 					    lastScrollPosition = this.scrollLeft;
-					});
-
-					// Подписка на событие click элемента prev
-					this.bindTo('prev', 'click', function() {
-						this.onPrevClick();
 					});
 				}
 			}
 		},
 
-		_onThumbClick: function(e) {
+		onThumbClick: function(e, data) {
 			// Показать большую картинку
-			var bigPictureSrc = e.target.domElem.attr('href');
+			var bigPictureSrc = data;
 			this.showPreloader();
 			this.showBigPicture( bigPictureSrc );
-		},
-
-		onPrevClick: function() {
-			this.emit('prevPressed');
-		},
-
-		onDisablePrev: function() {
-			this.setMod(this.elem('prev'), 'disabled');
 		},
 
 		showBigPicture: function(picture) {
@@ -75,22 +71,18 @@ modules.define(
 			});
 
 			var $img = $(img);
-			_this = this;
+			_this = this;			
 
 			$img.on('load', function() {
 				DOM.replace(_this.findElem('image'), $img);
 				_this.centrateImage($img);
-				$(_this.findElem('image')).hide().fadeIn();
+				_this.findElem('image').hide().fadeIn();
 			});
-
-			$(window).bind('resize.gallery__image', function() {
-				_this.centrateImage($img);
-			})
-			.trigger('resize');
 		},
 
 		showPreloader: function() {
-			$(this.findElem('image')).attr({'src': preloader});
+			$('.gallery__image').attr({'src': preloader});
+			// this.showBigPicture(preloader);
 		},
 
 		centrateImage: function($img) {
@@ -133,20 +125,21 @@ modules.define(
 				}
 				
 				var thumb = {
-					block: 'thumb',
-					url: bigImg,
-					content: {
+						block: 'slider',
 						elem: 'item',
-						attrs: { src: collection.entries[i].img.XXS.href }
-					}
+						attrs: { src: collection.entries[i].img.XXS.href, big: bigImg },
 				};
 
-				DOM.append( $('.sliderInner'), BEMHTML.apply(thumb));
-
+				// Для первого элемента item блока slider устанавливаем модификатор current
 				if (firstRun) {
-					this.showBigPicture(bigImg);
+
+					thumb.mods = {current: true};
 					firstRun = false;
-				};
+					DOM.append( $('.slider__inner'), BEMHTML.apply(thumb));
+					this.emit('append');
+
+				}
+				else DOM.append( $('.slider__inner'), BEMHTML.apply(thumb));
 			};
 		}
 	});

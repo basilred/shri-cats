@@ -1,0 +1,7 @@
+.slider__inner
+{
+	display: inline-block;
+    position: relative;
+    white-space: nowrap;
+    height: 95px;
+}

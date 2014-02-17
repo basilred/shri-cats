@@ -1,0 +1,9 @@
+block('slider').elem('item')(
+
+	tag()('img'),
+
+	attrs()(function() {
+		return { src: this.ctx.url || '', big: this.ctx.big }
+	})
+
+);
