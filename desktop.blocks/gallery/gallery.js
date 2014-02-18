@@ -82,7 +82,6 @@ modules.define(
 
 		showPreloader: function() {
 			$('.gallery__image').attr({'src': preloader});
-			// this.showBigPicture(preloader);
 		},
 
 		centrateImage: function($img) {
