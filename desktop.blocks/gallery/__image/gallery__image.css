@@ -1,7 +1,10 @@
 .gallery__image
 {
 	display: block;
-	max-width: 90%;
+	position: fixed;
+	max-width: 85%;
 	max-height: 90%;
-	margin: 0 auto;
+	margin: null;
+	top: 50%;
+	left: 50%;
 }

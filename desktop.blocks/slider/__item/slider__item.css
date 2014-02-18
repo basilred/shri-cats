@@ -1,6 +1,7 @@
-.thumb__item
+.slider__item
 {
 	width: 75px;
+	height: 75px;
 	padding: 10px;
 	display: inline-block;
 }

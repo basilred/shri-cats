@@ -1,0 +1,13 @@
+.gallery__prev
+{
+	width: 40px;
+	height: 40px;
+	border-top: 8px solid black;
+	border-left: 8px solid black;
+	position: absolute;
+	left: 16px;
+	top: 50%;
+	cursor: pointer;
+			transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+}

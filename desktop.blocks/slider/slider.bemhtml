@@ -1,0 +1,11 @@
+block('slider')(
+
+	js()(true),
+
+	elem('item')(
+
+		tag()('img')
+	
+	)
+
+);

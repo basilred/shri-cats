@@ -12,16 +12,22 @@
             block: 'gallery',
             content: [
                 {
+                    elem: 'prev'
+                },
+                {
                     elem: 'image',
                     url: '/keep-calm-and-bem.png'
-                }
-            ]
-        },
-        {
-            block: 'slider',
-            content: [
+                },
                 {
-                    block: 'sliderInner'
+                    elem: 'next'
+                },
+                {
+                    block: 'slider',
+                    content: [
+                        {
+                            elem: 'inner'
+                        }
+                    ]
                 }
             ]
         },
