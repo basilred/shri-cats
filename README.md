@@ -1,6 +1,16 @@
-Задание на экзамен ШРИ
-======================
+# Задание на экзамен ШРИ
 
-Задание на экзамен ШРИ Яндекса.
+Задание на экзамен школы разработки интерфейсов Яндекса.
 
-UPD.: Переделано с использованием bem-tools 
+## Результат
+
+[Собранная рабочая страничка](http://basilred.github.io/shri-cats/index/)
+
+## Установка:
+
+    git clone git@github.com:basilred/shri-cats.git
+    cd shri-cats
+    npm install
+    ./node_modules/.bin/bem server
+
+После этого можно посмотреть готовую страницу по адресу: [localhost:8080/desktop.bundles/index/index.html](http://localhost:8080/desktop.bundles/index/index.html)
