@@ -8,6 +8,6 @@ node_modules/
 *.bundles/*/*.*
 !*.bundles/*/*.bemjson.js
 !*.bundles/index/index.html
-!*.bundles/index/_index.js
-!*.bundles/index/_index.css
+!*.bundles/index/index.js
+!*.bundles/index/index.css
 !*.bundles/.bem/*
