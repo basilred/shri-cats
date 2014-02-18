@@ -1,0 +1,108 @@
+/* ../../desktop.blocks/gallery/__prev/gallery__prev.css begin */
+.gallery__prev
+{
+	width: 40px;
+	height: 40px;
+	border-top: 8px solid black;
+	border-left: 8px solid black;
+	position: absolute;
+	left: 16px;
+	top: 50%;
+	cursor: pointer;
+			transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+}
+
+/* ../../desktop.blocks/gallery/__prev/gallery__prev.css end */
+/* ../../desktop.blocks/gallery/__prev/_disabled/gallery__prev_disabled.css begin */
+.gallery__prev_disabled
+{
+	border-color: lightgrey;
+	cursor: auto;
+}
+
+/* ../../desktop.blocks/gallery/__prev/_disabled/gallery__prev_disabled.css end */
+/* ../../desktop.blocks/gallery/__image/gallery__image.css begin */
+.gallery__image
+{
+	display: block;
+	position: fixed;
+	max-width: 85%;
+	max-height: 90%;
+	margin: null;
+	top: 50%;
+	left: 50%;
+}
+
+/* ../../desktop.blocks/gallery/__image/gallery__image.css end */
+/* ../../desktop.blocks/gallery/__next/gallery__next.css begin */
+.gallery__next
+{
+	width: 40px;
+	height: 40px;
+	border-top: 8px solid black;
+	border-right: 8px solid black;
+	position: absolute;
+	right: 16px;
+	top: 50%;
+	cursor: pointer;
+			transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+}
+
+/* ../../desktop.blocks/gallery/__next/gallery__next.css end */
+/* ../../desktop.blocks/gallery/__next/_disabled/gallery__next_disabled.css begin */
+.gallery__next_disabled
+{
+	border-color: lightgrey;
+	cursor: auto;
+}
+
+/* ../../desktop.blocks/gallery/__next/_disabled/gallery__next_disabled.css end */
+/* ../../desktop.blocks/slider/slider.css begin */
+.slider
+{
+	position: fixed;
+	overflow: hidden;
+	vertical-align: baseline;
+	width: 100%;
+	height: 95px;
+	left: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, .6);
+	opacity: 0;
+	transition: opacity 0.25s;
+}
+
+.slider:hover
+{
+	opacity: 1;
+}
+
+/* ../../desktop.blocks/slider/slider.css end */
+/* ../../desktop.blocks/slider/__item/slider__item.css begin */
+.slider__item
+{
+	width: 75px;
+	height: 75px;
+	padding: 10px;
+	display: inline-block;
+}
+
+/* ../../desktop.blocks/slider/__item/slider__item.css end */
+/* ../../desktop.blocks/slider/__item/_current/slider__item_current.css begin */
+.slider__item_current
+{
+	background-color: orange;
+}
+
+/* ../../desktop.blocks/slider/__item/_current/slider__item_current.css end */
+/* ../../desktop.blocks/slider/__inner/slider__inner.css begin */
+.slider__inner
+{
+	display: inline-block;
+    position: relative;
+    white-space: nowrap;
+    height: 95px;
+}
+/* ../../desktop.blocks/slider/__inner/slider__inner.css end */
