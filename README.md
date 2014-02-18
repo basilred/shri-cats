@@ -4,7 +4,7 @@
 
 ## Результат
 
-[Собранная рабочая страничка](http://basilred.github.io/shri-cats/desktop.bundles/index/)
+[Собранная рабочая страничка](http://basilred.github.io/shri-cats/desktop.bundles/index/index.html)
 
 ## Установка:
 
